@@ -1,6 +1,6 @@
-My name is Carter Andrew! It's a pleasure to meet you :)
+![](/images/home.jpg)
 
-![Alt Text](/images/home.jpg)
+My name is ***Carter Andrew***, it's a pleasure to meet you :)
 
 I'm a computer entusiast with skills in **full stack development, data science, and machine learning**. I am currently persuing my masters in data science and machine learning from CU Boulder. To learn more about my skills check my [resume](/resume).
 
