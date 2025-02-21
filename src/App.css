@@ -19,12 +19,16 @@ img {
 	object-fit: contain;
 }
 
+p {
+		margin: 0;
+}
+
 :root {
 	--default-padding: .5em;
 	--shadow-color: #00000022;
 	--background-color: snow;
 	--foreground-color: black;
-	--highlight-color: blue;
+	--highlight-color: tomato;
 	--glass-color: #00000011;
 	--glass-color-highlight: #00000044;
 }

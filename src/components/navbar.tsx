@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 import { useTransition } from "../hooks/contextHooks"
 
@@ -23,11 +23,11 @@ const NavBar: React.FC<NavBarProps> = ({ style }) => {
 			style={style}
 		>
 			<div id='inner-navbar'>
-				<motion.div whileHover={{opacity: .5}} style={{ overflow: 'auto' }}>
+				<motion.div whileHover={{ opacity: .5 }} style={{ overflow: 'auto' }}>
 					<NavLink to='/' className={delayedLocation.pathname === '/' ? 'delayed-active' : ''} >Carter Andrew</NavLink>
 				</motion.div>
 				<div style={{ flex: 1, display: "flex", gap: '--default-padding' }} >
-						{delayedLocation.pathname}
+					{delayedLocation.pathname}
 				</div>
 				{links.map((link) => {
 					const path = `/${link}`

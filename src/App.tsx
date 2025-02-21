@@ -13,6 +13,7 @@ import About from './pages/about';
 import ProjectsIndex from './pages/projectIndex';
 import LazyMdx, { LazyMdxProps, MdxMappingItem } from './components/lazyMdx';
 import FourOhFour from './pages/404';
+import Pom from './pages/pom';
 
 
 const blogMdxElements: MdxMappingItem[] = Object.entries(import.meta.glob('./blogs/**.mdx')).map(([key, mdxFunction]) => ({
@@ -35,6 +36,10 @@ function App() {
 				{
 					index: true,
 					element: <Home />,
+				},
+				{
+					path: '/projects/pom',
+					element: <Pom />
 				},
 				{
 					path: '/projects/*',
