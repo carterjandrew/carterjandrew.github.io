@@ -1,5 +1,8 @@
 import { useMemo, useState } from "react"
-import { FaPlay } from "react-icons/fa"
+import { FaPlay, FaStepForward } from "react-icons/fa"
+import { IoIosRefresh } from "react-icons/io"
+import { LuRefreshCw } from "react-icons/lu"
+import { TbRefresh } from "react-icons/tb"
 
 export default function Pom() {
 	const [studyTime, setStudy] = useState(25 * 60)
@@ -85,27 +88,63 @@ export default function Pom() {
 					))}
 				</div>
 			</div>
-			<button
-				style={{
-					all: 'unset',
-					display: 'flex',
-					flexDirection: 'row',
-					justifyContent: 'center',
-					alignItems: 'center',
-					gap: 10,
-					padding: 10,
-					border: 'solid',
-					borderWidth: 2,
-					borderColor: 'var(--foreground-color)'
-				}}>
-				<FaPlay />
-				<p>Start</p>
-			</button>
 			<div style={{
 				display: 'flex',
 				flexDirection: 'row',
+				padding: 0,
+				gap: 10,
+				justifyContent: 'space-between',
+				alignItems: 'center',
+				width: '50vh'
 			}}>
-				
+				<button
+					style={{
+						all: 'unset',
+						display: 'flex',
+						flexDirection: 'row',
+						justifyContent: 'center',
+						alignItems: 'center',
+						gap: 10,
+						padding: 10,
+						border: 'solid',
+						borderWidth: 2,
+						borderColor: 'var(--foreground-color)'
+					}}>
+					<TbRefresh size={24}/>
+					<p>Reset</p>
+				</button>
+				<button
+					style={{
+						all: 'unset',
+						display: 'flex',
+						flexDirection: 'row',
+						justifyContent: 'center',
+						alignItems: 'center',
+						gap: 10,
+						padding: 10,
+						border: 'solid',
+						borderWidth: 2,
+						borderColor: 'var(--foreground-color)'
+					}}>
+					<FaPlay />
+					<p>Start</p>
+				</button>
+				<button
+					style={{
+						all: 'unset',
+						display: 'flex',
+						flexDirection: 'row',
+						justifyContent: 'center',
+						alignItems: 'center',
+						gap: 10,
+						padding: 10,
+						border: 'solid',
+						borderWidth: 2,
+						borderColor: 'var(--foreground-color)'
+					}}>
+					<FaStepForward />
+					<p>Skip</p>
+				</button>
 			</div>
 		</div>
 	)
