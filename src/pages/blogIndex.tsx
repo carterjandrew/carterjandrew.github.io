@@ -18,16 +18,22 @@ export default function BlogIndex() {
 	const [delayedLocation, setDelayedLocation] = useState(locaiton)
 	const [currentSlug, setCurrentSlug] = useState<string>()
 	const [targetSlug, setTargetSlug] = useState<string>()
-	const blogName = useMemo(() => delayedLocation.pathname.replace('/about/', ''), [delayedLocation])
+	const blogName = useMemo(() => delayedLocation.pathname.replace('/blog/', ''), [delayedLocation])
+	const itemExists = useMemo(
+		() => blogPreviewElements.findIndex(
+			({ path }) => path === blogName
+		) != -1
+		, [blogName]
+	)
 
 	const buttonVariants: Variants = {
 		normal: {},
 		hover: {
-				scale: 1.1,
-				x: '-10%'
+			scale: 1.1,
+			x: '-10%'
 		},
 		nonHover: {
-				opacity: .5
+			opacity: .5
 		}
 	}
 
@@ -36,7 +42,7 @@ export default function BlogIndex() {
 	}, [])
 
 	useEffect(() => {
-		if(!currentSlug) setCurrentSlug(targetSlug)
+		if (!currentSlug) setCurrentSlug(targetSlug)
 	}, [targetSlug])
 
 	if (delayedLocation.pathname === '/blog') return (
@@ -48,7 +54,7 @@ export default function BlogIndex() {
 							initial={{ opacity: 0, filter: 'blur(50px)' }}
 							animate={{ opacity: 1, filter: 'blur(0px)' }}
 							exit={{ opacity: 0, filter: 'blur(10px)' }}
-							style={{ maxHeight: '100%'}}
+							style={{ maxHeight: '100%' }}
 						>
 							{blogPreviewElements.find(({ path }) => path === currentSlug)!.element}
 						</motion.div>
@@ -65,13 +71,13 @@ export default function BlogIndex() {
 						onMouseEnter={() => setTargetSlug(path)}
 						onMouseLeave={() => setTargetSlug(undefined)}
 						variants={buttonVariants}
-						animate={targetSlug ? path === targetSlug? 'hover': 'nonHover' : 'normal'}
+						animate={targetSlug ? path === targetSlug ? 'hover' : 'nonHover' : 'normal'}
 					>{path}</motion.button>
 				))}
 			</div>
 		</div >
 	)
-	if(!(Object.keys(blogPreviewElements).findIndex(k => k === blogName) + 1)) return <FourOhFour />
+	if (!itemExists) return <FourOhFour />
 	return (
 		<div id='blog-md-wrapper'>
 			<Outlet />

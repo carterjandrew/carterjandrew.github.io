@@ -32,9 +32,10 @@ const NavBar: React.FC<NavBarProps> = ({ style }) => {
 				{links.map((link) => {
 					const path = `/${link}`
 					const name = link.charAt(0).toUpperCase() + link.slice(1)
-					const className = delayedLocation.pathname === path ? 'delayed-active' : ''
+					const className = delayedLocation.pathname.split('/')[1] === link ? 'delayed-active' : ''
 					return (
-						<motion.div whileHover={{ opacity: .5 }} style={{ overflow: 'auto' }}>
+						<motion.div 
+						whileHover={{ opacity: .5 }} style={{ overflow: 'auto' }}>
 							<NavLink key={link} to={path} className={className}>{name === 'About' ? "Get In Touch" : name}</NavLink>
 						</motion.div>
 					)

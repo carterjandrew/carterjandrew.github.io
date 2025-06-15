@@ -1,20 +1,57 @@
-import { useMemo, useState } from "react"
-import { FaPlay, FaStepForward } from "react-icons/fa"
+import { useEffect, useMemo, useRef, useState } from "react"
+import { FaPause, FaPlay, FaStepForward } from "react-icons/fa"
 import { IoIosRefresh } from "react-icons/io"
 import { LuRefreshCw } from "react-icons/lu"
 import { TbRefresh } from "react-icons/tb"
 
 export default function Pom() {
-	const [studyTime, setStudy] = useState(25 * 60)
-	const [breakTime, setBreakTime] = useState(5 * 60)
+	const [studyTime, setStudy] = useState(10)
+	const [breakTime, setBreakTime] = useState(10)
 	const [studying, setStudying] = useState(true)
-	const [currentTimer, setCurrentTimer] = useState(3 * studyTime / 4)
-	const [numSessions, setNumSessions] = useState(2)
+	const [currentTimer, setCurrentTimer] = useState(studyTime)
+	const [paused, setPaused] = useState(true)
+	const [numSessions, setNumSessions] = useState(0)
+	const [studyStatus, setStudyStatus] = useState('Ready to begin?')
+	const interval = useRef<number>()
 
 	const progress = useMemo(() => {
 		if (studying) return currentTimer / studyTime
 		return currentTimer / breakTime
 	}, [currentTimer, studying])
+
+	const [currentMins, currentSecs] = useMemo(() => {
+		const cm = Math.floor(currentTimer / 60)
+		const numSecs = currentTimer % 60
+		const cs = numSecs < 10 ? `0${numSecs}` : numSecs
+		return [cm, cs]
+	}, [currentTimer])
+
+	useEffect(() => {
+		if (paused) {
+			clearInterval(interval.current)
+			interval.current = undefined
+			setStudyStatus('Paused')
+		}
+		else {
+			interval.current = setInterval(() => {
+				setCurrentTimer(ct => ct - 1)
+			}, 1000)
+			setStudyStatus('Studying')
+		}
+	}, [paused])
+
+	useEffect(() => {
+		if (currentTimer > 0) return
+		if (studying) {
+			setNumSessions((numSessions + 1) % 5)
+			setCurrentTimer(breakTime)
+			setStudyStatus('Break time')
+		} else {
+			setCurrentTimer(studyTime)
+			setStudyStatus('Studing again')
+		}
+		setStudying(!studying)
+	}, [currentTimer])
 
 	return (
 		<div style={{
@@ -63,12 +100,17 @@ export default function Pom() {
 					/>
 				</svg>
 				<p style={{
-					zIndex: 100,
+					fontWeight: 900,
+					fontSize: '3vh',
+					margin: 0
+				}}>{studyStatus}</p>
+				<p style={{
 					fontWeight: 900,
 					fontSize: '10vh',
 					margin: 0
-				}}>11:45</p>
+				}}>{`${currentMins}:${currentSecs}`}</p>
 				<div style={{
+					padding: '1vh',
 					display: 'flex',
 					flexDirection: 'row',
 					alignItems: 'center',
@@ -95,7 +137,6 @@ export default function Pom() {
 				gap: 10,
 				justifyContent: 'space-between',
 				alignItems: 'center',
-				width: '50vh'
 			}}>
 				<button
 					style={{
@@ -110,10 +151,11 @@ export default function Pom() {
 						borderWidth: 2,
 						borderColor: 'var(--foreground-color)'
 					}}>
-					<TbRefresh size={24}/>
+					<TbRefresh size={24} />
 					<p>Reset</p>
 				</button>
 				<button
+					onClick={() => setPaused(!paused)}
 					style={{
 						all: 'unset',
 						display: 'flex',
@@ -126,8 +168,8 @@ export default function Pom() {
 						borderWidth: 2,
 						borderColor: 'var(--foreground-color)'
 					}}>
-					<FaPlay />
-					<p>Start</p>
+					{paused ? (<FaPlay />) : (<FaPause />)}
+					<p style={{ userSelect: 'none' }}>{paused ? 'Start' : 'Pause'}</p>
 				</button>
 				<button
 					style={{

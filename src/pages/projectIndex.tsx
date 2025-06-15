@@ -13,6 +13,8 @@ const projectPreviewElements: MdxMappingItem[] = Object.entries(import.meta.glob
 	element: <LazyMdx importHook={mdxFunction as LazyMdxProps['importHook']} />,
 }));
 
+console.log(projectPreviewElements)
+
 export default function ProjectsIndex() {
 	const navigate = useNavigate()
 	const locaiton = useLocation()
@@ -60,7 +62,7 @@ export default function ProjectsIndex() {
 				</AnimatePresence>
 			</div>
 			<div id='blog-index'>
-				{projects.map(({ path }) => (
+				{projectPreviewElements.map(({ path }) => (
 					<motion.button
 						key={path}
 						onClick={() => navigate(path)}
