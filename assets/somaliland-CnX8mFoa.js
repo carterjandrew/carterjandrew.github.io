@@ -1,4 +1,4 @@
-import{j as n}from"./index-DZENqHY2.js";function e(s){const r={br:"br",h1:"h1",img:"img",p:"p",strong:"strong",...s.components};return n.jsxs(n.Fragment,{children:[n.jsx(r.h1,{id:"nyagi-somaliland-project",children:"NYAGI Somaliland Project"}),`
+import{j as n}from"./index-BpoWhw3Q.js";function e(s){const r={br:"br",h1:"h1",img:"img",p:"p",strong:"strong",...s.components};return n.jsxs(n.Fragment,{children:[n.jsx(r.h1,{id:"nyagi-somaliland-project",children:"NYAGI Somaliland Project"}),`
 `,n.jsx(r.p,{children:n.jsx(r.img,{src:"/another-scan.png",alt:"Image not loading"})}),`
 `,n.jsxs(r.p,{children:[n.jsx(r.strong,{children:"Description"}),n.jsx(r.br,{}),`
 `,"An expidition to the Republic of Somaliland to train doctors in ultrasound for prenadal care"]}),`
