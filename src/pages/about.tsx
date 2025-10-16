@@ -31,7 +31,7 @@ export default function About() {
 			<div id='emailform'>
 				<h2>Send me a message</h2>
 				<input value={returnAddress} placeholder='Your email' onChange={(e) => setReturnAddress(e.target.value)} />
-				<textarea style={{ width: 500, height: 300 }} value={message} placeholder='Your message' onChange={(e) => setMessage(e.target.value)} />
+				<textarea value={message} placeholder='Your message' onChange={(e) => setMessage(e.target.value)} />
 				<button disabled={!valid.length} onClick={sendEmail}> {valid.length ? valid : 'Send Message'} </button>
 			</div>
 		</div>

@@ -9,11 +9,11 @@ import FourOhFour from './404';
 
 
 const projectPreviewElements: MdxMappingItem[] = Object.entries(import.meta.glob('../project-previews/**.mdx')).map(([key, mdxFunction]) => ({
-	path: key.replace('../project-previews/', '').replace('.mdx', ''),
+	path: key.replace('../project-previews/', '')
+		.replace('.mdx', '')
+		.replaceAll('-', ' '),
 	element: <LazyMdx importHook={mdxFunction as LazyMdxProps['importHook']} />,
 }));
-
-console.log(projectPreviewElements)
 
 export default function ProjectsIndex() {
 	const navigate = useNavigate()

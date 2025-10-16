@@ -12,7 +12,7 @@ const NavBar: React.FC<NavBarProps> = ({ style }) => {
 	const [delayedLocation,] = useState(location)
 	const [transition,] = useTransition()
 
-	const links = ['blog', 'projects', 'about']
+	const links = ['resume', 'blog', 'projects', 'about']
 
 	return (
 		<motion.div
@@ -35,6 +35,7 @@ const NavBar: React.FC<NavBarProps> = ({ style }) => {
 					const className = delayedLocation.pathname.split('/')[1] === link ? 'delayed-active' : ''
 					return (
 						<motion.div 
+						key={link}
 						whileHover={{ opacity: .5 }} style={{ overflow: 'auto' }}>
 							<NavLink key={link} to={path} className={className}>{name === 'About' ? "Get In Touch" : name}</NavLink>
 						</motion.div>

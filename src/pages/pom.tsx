@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { FaPause, FaPlay, FaStepForward } from "react-icons/fa"
-import { IoIosRefresh } from "react-icons/io"
-import { LuRefreshCw } from "react-icons/lu"
 import { TbRefresh } from "react-icons/tb"
 
 export default function Pom() {
@@ -12,6 +10,10 @@ export default function Pom() {
 	const [paused, setPaused] = useState(true)
 	const [numSessions, setNumSessions] = useState(0)
 	const [studyStatus, setStudyStatus] = useState('Ready to begin?')
+	const renderTime = useRef<number>(studyTime)
+	const renderMins = useRef<number>(0)
+	const renderSecs= useRef<number>(0)
+	const renderProgress = useRef<number>(1)
 	const interval = useRef<number>()
 
 	const progress = useMemo(() => {
@@ -39,6 +41,31 @@ export default function Pom() {
 			setStudyStatus('Studying')
 		}
 	}, [paused])
+
+	function findRenderTimestamps(){
+		const cm = Math.floor(render/ 60)
+		const numSecs = currentTimer % 60
+		const cs = numSecs < 10 ? `0${numSecs}` : numSecs
+		return [cm, cs]
+	}
+
+	function interpolateRenderedTime(){
+			const diff: number = currentTimer - renderTime.current
+			const diffAbs: number = Math.abs(diff)
+			if (diffAbs === 0){
+					return
+			}
+			else if (diffAbs > 1){
+					renderTime.current = currentTimer
+			} else {
+					renderTime.current += diff / 10
+			}
+			requestAnimationFrame(interpolateRenderedTime)
+	}
+
+	useEffect(() => {
+			interpolateRenderedTime()
+	}, [currentTimer])
 
 	useEffect(() => {
 		if (currentTimer > 0) return
