@@ -1,0 +1,94 @@
+# What I helped do:
+
+Make a backend service modernizing OnX maps approach to file imports. This had the following key impacts:
+
+| Impact Name | Previous Metric | New Metric |
+| --- | --- | --- |
+| Complile Time | ~20 mins | ~40 secs |
+| Code Coverage | 80% | 89% |
+| Max File Size | 4MB | 500MB |
+| Max Concurrent Requests | ~200 | ~500 |
+| Proportion of successful imports (from test data)| 68% | 85% |
+
+# Defining the problem
+
+During my 2025 summer I had the honor of interning with [OnX Maps](http://onxmaps.com), a company focused on bringing the explorer out in everyone.
+
+## The importance of markups
+One of the biggest selling features of these applications is their ability to mark up maps with your own content. I'm sure we can all relate to the expirience of having visited some amazing place only to never be able to find it again. 
+
+As you can imagine bringing over content from other applications or gear is another pretty big component. If you recorded a hiking track on your Garmin watch, or have some content you want to bring over from alltrails we support you importing that into our system. 
+
+## The problem with imports
+
+I was suprised to learn this system had some existing flaws though:
+
+### Interdependent Service
+
+The original service was built as a monolithic program aimed to handle all endpoints for our customers content. This meant that if there was an issue with any of the endpoints, the entirety of customer content was affected. 
+
+Combine this with the complexity of the codebase meant that it was hard to:
+
+1. Push new features
+2. Maintain coverage
+3. Debug issues
+
+### File Size Limitations
+
+The previous solution processed all files before responding to the users inital HTTP request. That means updloads, processing, insertion, all happened in a single `POST` command. 
+
+While that makes it very simple for our client apps it is very hard to scale. As a solution filesize was limited to 4MB to simply keep upload and process times from causing service lags.
+
+Along with this, it was a big problem because if imports lagged the service, the entire service for customer content would lag.
+
+### No Resilance to Outages/Degredation
+
+There are many reasons a backend service can degrage:
+
+1. Too many concurrent requests
+2. Outage with another service (Ex: a database)
+3. Something went wrong with communication over the internet
+
+Because our service retains no record of the files it's trying to process, if an outage happens the service will loose everything that's currently in progress. 
+
+Same goes for if we break something with our service, if any error gets thrown thats data lost. 
+
+### Vauge Errors
+
+Finally, when there was an issue importing a file the service would simply return `there was a problem with your import`. Yeah, frustratingly vauge...
+
+# Solution
+
+My solution was a `golang` based service that addressed all of these issues:
+
+### Interdependent Service
+
+This is now it's own service, capable of scaling based off relevant metrics (like size of queue) and plugs into OnX's Apollo Supergraph to federate and unify the API
+
+### File Size Limitations & Service Degredation
+
+Our service *decouples uploads and processing* and uses queue services. This makes it easier to:
+
+1. Handle massive file sizes
+2. Handler larger bursts of uploads
+3. Handle service degredation gracefully
+
+In fact, our entire service built around this concept discussed in depth [by uber on their use of Apache Kafka](https://www.uber.com/blog/reliable-reprocessing/) and it works like this:
+
+TODO: Insert chart
+
+### Vague error elimination & data mutation notices
+
+As a little bonus for the project I wanted to create errors that were precise, specific, and actionable. Go was actually incredibly nice for building these out. It allowed us to bubble up errors capturing context as we passed through layers of functions. 
+
+Along with this a similar pattern helped create detailed notices on any mutations made to data in the dataset. This means if a customer bulk imports a bunch of data they plan on deleting they won't discover that something changed after deleting it. 
+
+TODO: Ask for Photos from Zach
+
+# Bonus: Service monitoring
+
+Inially when setting out on the project I set up a SLO on the goals for my service from both a user and developer perspective. 
+
+Later I used load testing to build realistic metrics for these goals, and built a dashboard helping capture insights into the preformance in accordande with these goals.
+
+TODO: Insert photo of dashboard
