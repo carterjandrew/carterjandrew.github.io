@@ -1,20 +1,24 @@
 import * as THREE from 'three'
 import { useEffect, useRef, useState } from 'react';
 import {Canvas, ThreeElements, useFrame} from '@react-three/fiber'
-import { Backdrop, Environment, Fisheye } from "@react-three/drei"
+import { Fisheye, useGLTF, useTexture } from "@react-three/drei"
+import { NormalRGBMaterial } from '../components/horizontalDisplace';
+import { extend } from '@react-three/fiber';
 
-function Box(props: ThreeElements['mesh']) {
-				const meshRef = useRef<THREE.Mesh>(null!)
-				useFrame((_, delta) => (meshRef.current.rotation.y += delta))
-				return (
-								<mesh
-  								{...props}
-  								ref={meshRef}
-								>
-  								<boxGeometry args={[1,1,1]} />
-  								<meshStandardMaterial color={'red'} />
-								</mesh>
-				)
+extend({ NormalRGBMaterial })
+
+
+function Logo(props: ThreeElements['mesh']) {
+	const meshRef = useRef<THREE.Mesh>(null!)
+	const { nodes } = useGLTF("/threemodels/logo2.glb")
+	useFrame((_, delta) => (meshRef.current.rotation.z += delta))
+	return (
+		<mesh 
+			ref={meshRef}
+			geometry={nodes["Curve001"].geometry} 
+			{...props}
+		/>
+	)
 }
 
 export default function Home() {
@@ -23,6 +27,7 @@ export default function Home() {
 	function setBackgroundColor(darkMode: boolean){
 		if(!glRef.current) return
 		if(!window.matchMedia) return
+		if(darkMode == undefined) return
 		const color = darkMode ? "#000000": "#ffffff"
 		glRef.current.setClearColor(color, 1)
 	}
@@ -46,12 +51,12 @@ export default function Home() {
 	}, [darkMode])
 	return (
 		<>
-			<div id='bigname' style={{ display: 'flex', width: '100%', flexGrow: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column', paddingLeft: '30%' }}>
+			<div>
 				<Canvas 
 					flat 
 					onCreated={({gl}) => {
 						glRef.current = gl;
-						setBackgroundColor()
+						setBackgroundColor(darkMode)
 					}}
 					style={{
 						zIndex: -1,
@@ -59,14 +64,18 @@ export default function Home() {
 						top: 0, bottom: 0, left: 0, right: 0,
 					}}
 				>
-					<Fisheye>
+					<Fisheye
+						zoom={1}
+					>
 						<ambientLight intensity={Math.PI / 2} />
 						<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
 						<pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
-						<Box 
-							position={[0,0,0]} 
-							scale={5}
-						/>
+						<Logo
+							scale={35}
+							rotation-x={Math.PI/2}
+						>
+							<normalRGBMaterial />
+						</Logo>
 					</Fisheye>
 				</Canvas>
 			</div>
