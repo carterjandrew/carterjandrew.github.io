@@ -1,11 +1,71 @@
 import { motion } from "framer-motion"
-import { useState } from "react"
+import { FC, useEffect, useRef, useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 import { useTransition } from "../hooks/contextHooks"
-import FullLogo from "./logo"
+import {Logo} from "./logo"
+import { Canvas } from "@react-three/fiber"
+import { WebGLRenderer } from "three"
+import { PerspectiveCamera } from "@react-three/drei"
+import { EffectComposer } from "@react-three/postprocessing"
+import { LensDistortion } from "./effects/lensDistortion"
 
 type NavBarProps = {
 	style?: React.CSSProperties
+}
+
+const SpinningLogo: FC<HTMLCanvasElement> = (props) => {
+	const glRef = useRef<WebGLRenderer>()
+	const [darkMode, setDarkMode] = useState(isDarkMode())
+	function setBackgroundColor(darkMode: boolean){
+		if(!glRef.current) return
+		if(!window.matchMedia) return
+		if(darkMode == undefined) return
+		const color = darkMode ? "#000000": "#ffffff"
+		glRef.current.setClearColor(color, 1)
+	}
+	function isDarkMode(){
+		if(!window.matchMedia) return false;
+		return window.matchMedia('(prefers-color-scheme: dark)').matches
+	}
+	useEffect(() => {
+		const listener = (e: MediaQueryListEvent) => setDarkMode(e.matches)
+		window.matchMedia(
+			'(prefers-color-scheme: dark)'
+		).addEventListener("change", listener)
+		return () => {
+			window.matchMedia(
+				'(prefers-color-scheme: dark)'
+			).removeEventListener("change", listener)
+		}
+	}, [])
+	useEffect(() => {
+		setBackgroundColor(darkMode)
+	}, [darkMode])
+
+	return (
+		<Canvas
+			onCreated={({gl}) => {
+				glRef.current = gl;
+				setBackgroundColor(darkMode)
+			}}
+			style={{
+				height: "50px"
+			}}
+			camera={{ fov: 1}}
+		>
+			<Logo
+				scale={0.8}
+				rotation-x={Math.PI/2}
+			>
+				<meshBasicMaterial color={darkMode ? "white": "black"} />
+			</Logo>
+			<EffectComposer>
+				<LensDistortion
+					amount={0.03}
+				/>
+			</EffectComposer>
+		</Canvas>
+	)
 }
 
 const NavBar: React.FC<NavBarProps> = ({ style }) => {
@@ -25,9 +85,9 @@ const NavBar: React.FC<NavBarProps> = ({ style }) => {
 		>
 			<div id='inner-navbar'>
 				<motion.div whileHover={{ opacity: .5 }} style={{ overflow: 'auto' }}>
-					<FullLogo
-						style={{height: "10px"}}
-					/>
+					<NavLink to="/" style={{border: "none"}}>
+						<SpinningLogo />
+					</NavLink>
 				</motion.div>
 				<div style={{ flex: 1, display: "flex", gap: '--default-padding' }} >
 					{delayedLocation.pathname}
