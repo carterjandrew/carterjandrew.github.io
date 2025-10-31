@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import { useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 import { useTransition } from "../hooks/contextHooks"
+import FullLogo from "./logo"
 
 type NavBarProps = {
 	style?: React.CSSProperties
@@ -24,7 +25,9 @@ const NavBar: React.FC<NavBarProps> = ({ style }) => {
 		>
 			<div id='inner-navbar'>
 				<motion.div whileHover={{ opacity: .5 }} style={{ overflow: 'auto' }}>
-					<NavLink to='/' className={delayedLocation.pathname === '/' ? 'delayed-active' : ''} >Carter Andrew</NavLink>
+					<FullLogo
+						style={{height: "10px"}}
+					/>
 				</motion.div>
 				<div style={{ flex: 1, display: "flex", gap: '--default-padding' }} >
 					{delayedLocation.pathname}
