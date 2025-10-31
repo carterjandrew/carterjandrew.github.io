@@ -1,15 +1,20 @@
 import * as THREE from 'three'
 import { useEffect, useRef, useState } from 'react';
 import {Canvas, ThreeElements, useFrame} from '@react-three/fiber'
-import { Fisheye, useGLTF, useTexture } from "@react-three/drei"
+import { Fisheye, MappedTextureType, useGLTF, useTexture } from "@react-three/drei"
 import { NormalRGBMaterial } from '../components/horizontalDisplace';
 import { extend } from '@react-three/fiber';
 
 extend({ NormalRGBMaterial })
 
+type LogoProps = ThreeElements['mesh'] & {
+	texture: string
+}
 
-function Logo(props: ThreeElements['mesh']) {
+
+const Logo: React.FC<LogoProps> = ({texture, ...props}) => {
 	const meshRef = useRef<THREE.Mesh>(null!)
+	const gradient = useTexture(texture)
 	const { nodes } = useGLTF("/threemodels/logo2.glb")
 	useFrame((_, delta) => (meshRef.current.rotation.z += delta))
 	return (
@@ -17,7 +22,11 @@ function Logo(props: ThreeElements['mesh']) {
 			ref={meshRef}
 			geometry={nodes["Curve001"].geometry} 
 			{...props}
-		/>
+		>
+			<normalRGBMaterial
+				gradientMap={gradient}
+			/>
+		</mesh>
 	)
 }
 
@@ -65,16 +74,16 @@ export default function Home() {
 					}}
 				>
 					<Fisheye
-						zoom={1}
+						zoom={0.6}
 					>
 						<ambientLight intensity={Math.PI / 2} />
 						<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
 						<pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
 						<Logo
-							scale={35}
+							scale={30}
 							rotation-x={Math.PI/2}
+							texture="/public/gradient.png"
 						>
-							<normalRGBMaterial />
 						</Logo>
 					</Fisheye>
 				</Canvas>
