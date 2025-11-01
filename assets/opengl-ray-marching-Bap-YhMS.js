@@ -1,4 +1,4 @@
-import{j as e}from"./index-BpoWhw3Q.js";function a(t){const n={a:"a",h1:"h1",h2:"h2",img:"img",p:"p",...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{id:"raymarching-in-opengl",children:"Raymarching in OpenGL"}),`
+import{j as e}from"./index-BrrazfgB.js";function a(t){const n={a:"a",h1:"h1",h2:"h2",img:"img",p:"p",...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{id:"raymarching-in-opengl",children:"Raymarching in OpenGL"}),`
 `,e.jsx(n.p,{children:e.jsx(n.a,{href:"https://github.com/carterjandrew/computer_graphics_final_project",children:"GitHub"})}),`
 `,e.jsx(n.p,{children:e.jsx(n.img,{src:"/raymarching.png",alt:"alt text"})}),`
 `,e.jsx(n.h2,{id:"motivation",children:"Motivation"}),`
