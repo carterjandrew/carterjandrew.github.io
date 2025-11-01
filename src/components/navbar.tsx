@@ -1,16 +1,23 @@
 import { motion } from "framer-motion"
-import { FC, useEffect, useRef, useState } from "react"
+import { CSSProperties, FC, useEffect, useMemo, useRef, useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 import { useTransition } from "../hooks/contextHooks"
 import {Logo} from "./logo"
 import { Canvas } from "@react-three/fiber"
 import { WebGLRenderer } from "three"
 import { PerspectiveCamera } from "@react-three/drei"
-import { EffectComposer } from "@react-three/postprocessing"
+import { Bloom, EffectComposer } from "@react-three/postprocessing"
 import { LensDistortion } from "./effects/lensDistortion"
+import Glitch from "./glitch"
 
 type NavBarProps = {
 	style?: React.CSSProperties
+}
+
+type GlowingBorderProps = HTMLSpanElement & {
+	glowColor:					CSSProperties["color"],
+	glowOpacity:				number
+	shadowBlur:					number
 }
 
 const SpinningLogo: FC<HTMLCanvasElement> = (props) => {
@@ -86,11 +93,38 @@ const NavBar: React.FC<NavBarProps> = ({ style }) => {
 			<div id='inner-navbar'>
 				<motion.div whileHover={{ opacity: .5 }} style={{ overflow: 'auto' }}>
 					<NavLink to="/" style={{border: "none"}}>
-						<SpinningLogo />
+						<Glitch>
+						<img
+							src="/logo.svg"
+							style={{
+								filter: "invert(100%)",
+								width: "100%",
+								height: "50px",
+								objectFit: "contain"
+							}}
+						/>
+						</Glitch>
 					</NavLink>
 				</motion.div>
-				<div style={{ flex: 1, display: "flex", gap: '--default-padding' }} >
-					{delayedLocation.pathname}
+				<div style={{
+					flex: 1,
+					display: "flex",
+					gap: '--default-padding',
+					position: "relative",
+				}} >
+					<Glitch
+						scale={7}
+					>
+						<p style={{
+							fontWeight: 900,
+							textShadow: `
+								0 0 5px var(--foreground-color),
+								0 0 10px var(--foreground-color)
+							`
+						}}>
+							{delayedLocation.pathname}
+						</p>
+					</Glitch>
 				</div>
 				{links.map((link) => {
 					const path = `/${link}`
