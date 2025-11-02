@@ -1,11 +1,47 @@
 import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 import { useTransition } from "../hooks/contextHooks"
 import Glitch from "./glitch"
 
 type NavBarProps = {
 	style?: React.CSSProperties
+}
+
+type NavBarLinkProps = HTMLLinkElement & {
+	link: string,
+	delayedLocation: { pathname: string }
+}
+
+const NavBarLink: React.FC<NavBarLinkProps> = ({link, delayedLocation, ...props}) => {
+	const path = `/${link}`
+	const name = link.charAt(0).toUpperCase() + link.slice(1)
+	const [mouseInside, setMouseInside] = useState(false)
+	const className = useMemo(() => {
+		const clss = delayedLocation.pathname.split('/')[1]
+		if(clss === link || mouseInside) return "delayed-active";
+		return ""
+	}, [mouseInside])
+	const glitchScale = useMemo(() => {
+		if(className != "") return 7;
+		return 0;
+	}, [className])
+	return (
+		<Glitch
+			scale={glitchScale}
+		>
+			<NavLink 
+				onMouseEnter={() => setMouseInside(true)}
+				onMouseLeave={() => setMouseInside(false)}
+				key={link}
+				to={path}
+				className={className}
+				style={{
+					marginTop: glitchScale == 0 ? "0" : "-7px"
+				}}
+			>{name === 'About' ? "Get In Touch" : name}</NavLink>
+		</Glitch>
+	)
 }
 
 const NavBar: React.FC<NavBarProps> = ({ style }) => {
@@ -61,36 +97,10 @@ const NavBar: React.FC<NavBarProps> = ({ style }) => {
 					gap: '--default-padding',
 					position: "relative",
 				}} >
-					<Glitch
-						scale={7}
-					>
-						<p style={{
-							fontWeight: 900,
-							textShadow: `
-								0 0 5px var(--foreground-color),
-								0 0 10px var(--foreground-color)
-							`
-						}}>
-							{delayedLocation.pathname}
-						</p>
-					</Glitch>
 				</div>
-				{links.map((link) => {
-					const path = `/${link}`
-					const name = link.charAt(0).toUpperCase() + link.slice(1)
-					const className = delayedLocation.pathname.split('/')[1] === link ? 'delayed-active' : ''
-					return (
-						<Glitch
-							scale={className == "" ? 0 : 7}
-						>
-							<motion.div 
-							key={link}
-							whileHover={{ opacity: .5 }} style={{ overflow: 'auto' }}>
-								<NavLink key={link} to={path} className={className}>{name === 'About' ? "Get In Touch" : name}</NavLink>
-							</motion.div>
-						</Glitch>
-					)
-				})}
+				{links.map((link) => (
+					<NavBarLink link={link} delayedLocation={delayedLocation} />
+				))}
 			</div>
 		</motion.div>
 	)

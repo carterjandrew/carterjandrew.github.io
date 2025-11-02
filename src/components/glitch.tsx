@@ -57,9 +57,7 @@ export default function Glitch ({
           />
           <feDisplacementMap
             in="SourceGraphic"
-            in2="xBias"
             scale={scale}
-            xChannelSelector="R"
             yChannelSelector="G"
           />
         </filter>
