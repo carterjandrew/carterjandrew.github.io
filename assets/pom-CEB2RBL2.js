@@ -1,4 +1,4 @@
-import{j as n}from"./index-BrrazfgB.js";function o(t){const e={h1:"h1",p:"p",strong:"strong",...t.components};return n.jsxs(n.Fragment,{children:[n.jsx(e.h1,{id:"pomodoro-timer",children:"Pomodoro Timer"}),`
+import{j as n}from"./index-Bozkr-By.js";function o(t){const e={h1:"h1",p:"p",strong:"strong",...t.components};return n.jsxs(n.Fragment,{children:[n.jsx(e.h1,{id:"pomodoro-timer",children:"Pomodoro Timer"}),`
 `,n.jsx(e.p,{children:n.jsx(e.strong,{children:"Type"})}),`
 `,n.jsx(e.p,{children:"Webapp"}),`
 `,n.jsx(e.p,{children:n.jsx(e.strong,{children:"Use"})}),`
