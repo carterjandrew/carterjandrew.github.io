@@ -151,13 +151,11 @@ div {
 	text-align: center;
 	color: var(--foreground-color);
 	padding: 5px;
-	border: solid;
-	border-width: 2px;
 }
 
 #inner-navbar a.delayed-active {
-	background: var(--foreground-color);
-	color: var(--background-color);
+	text-shadow: 0 0 5px var(--foreground-color), 0 0 10px var(--foreground-color);
+	font-weight: 900;
 }
 
 #blog {

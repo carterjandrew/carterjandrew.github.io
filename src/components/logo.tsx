@@ -43,40 +43,9 @@ export const Logo: React.FC<ThreeElements['mesh']> = (props) => {
 }
 
 const FullLogo: FC<HTMLCanvasElement> = (props) => {
-	const glRef = useRef<THREE.WebGLRenderer>()
-	const [darkMode, setDarkMode] = useState(isDarkMode())
-	function setBackgroundColor(darkMode: boolean){
-		if(!glRef.current) return
-		if(!window.matchMedia) return
-		if(darkMode == undefined) return
-		const color = darkMode ? "#000000": "#ffffff"
-		glRef.current.setClearColor(color, 1)
-	}
-	function isDarkMode(){
-		if(!window.matchMedia) return false;
-		return window.matchMedia('(prefers-color-scheme: dark)').matches
-	}
-	useEffect(() => {
-		const listener = (e: MediaQueryListEvent) => setDarkMode(e.matches)
-		window.matchMedia(
-			'(prefers-color-scheme: dark)'
-		).addEventListener("change", listener)
-		return () => {
-			window.matchMedia(
-				'(prefers-color-scheme: dark)'
-			).removeEventListener("change", listener)
-		}
-	}, [])
-	useEffect(() => {
-		setBackgroundColor(darkMode)
-	}, [darkMode])
 	return (
 				<Canvas 
 					flat 
-					onCreated={({gl}) => {
-						glRef.current = gl;
-						setBackgroundColor(darkMode)
-					}}
 					style={{
 						zIndex: -1,
 						position: "absolute",

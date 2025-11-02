@@ -1,35 +1,22 @@
 import { motion } from "framer-motion"
-import { CSSProperties, FC, useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 import { useTransition } from "../hooks/contextHooks"
-import {Logo} from "./logo"
-import { Canvas } from "@react-three/fiber"
-import { WebGLRenderer } from "three"
-import { PerspectiveCamera } from "@react-three/drei"
-import { Bloom, EffectComposer } from "@react-three/postprocessing"
-import { LensDistortion } from "./effects/lensDistortion"
 import Glitch from "./glitch"
 
 type NavBarProps = {
 	style?: React.CSSProperties
 }
 
-type GlowingBorderProps = HTMLSpanElement & {
-	glowColor:					CSSProperties["color"],
-	glowOpacity:				number
-	shadowBlur:					number
-}
+const NavBar: React.FC<NavBarProps> = ({ style }) => {
+	const location = useLocation()
+	const [delayedLocation,] = useState(location)
+	const [transition,] = useTransition()
 
-const SpinningLogo: FC<HTMLCanvasElement> = (props) => {
-	const glRef = useRef<WebGLRenderer>()
+	const links = ['resume', 'blog', 'projects', 'about']
+
+	// Dark mode stuff
 	const [darkMode, setDarkMode] = useState(isDarkMode())
-	function setBackgroundColor(darkMode: boolean){
-		if(!glRef.current) return
-		if(!window.matchMedia) return
-		if(darkMode == undefined) return
-		const color = darkMode ? "#000000": "#ffffff"
-		glRef.current.setClearColor(color, 1)
-	}
 	function isDarkMode(){
 		if(!window.matchMedia) return false;
 		return window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -45,42 +32,6 @@ const SpinningLogo: FC<HTMLCanvasElement> = (props) => {
 			).removeEventListener("change", listener)
 		}
 	}, [])
-	useEffect(() => {
-		setBackgroundColor(darkMode)
-	}, [darkMode])
-
-	return (
-		<Canvas
-			onCreated={({gl}) => {
-				glRef.current = gl;
-				setBackgroundColor(darkMode)
-			}}
-			style={{
-				height: "50px"
-			}}
-			camera={{ fov: 1}}
-		>
-			<Logo
-				scale={0.8}
-				rotation-x={Math.PI/2}
-			>
-				<meshBasicMaterial color={darkMode ? "white": "black"} />
-			</Logo>
-			<EffectComposer>
-				<LensDistortion
-					amount={0.03}
-				/>
-			</EffectComposer>
-		</Canvas>
-	)
-}
-
-const NavBar: React.FC<NavBarProps> = ({ style }) => {
-	const location = useLocation()
-	const [delayedLocation,] = useState(location)
-	const [transition,] = useTransition()
-
-	const links = ['resume', 'blog', 'projects', 'about']
 
 	return (
 		<motion.div
@@ -91,21 +42,19 @@ const NavBar: React.FC<NavBarProps> = ({ style }) => {
 			style={style}
 		>
 			<div id='inner-navbar'>
-				<motion.div whileHover={{ opacity: .5 }} style={{ overflow: 'auto' }}>
 					<NavLink to="/" style={{border: "none"}}>
 						<Glitch>
-						<img
-							src="/logo.svg"
-							style={{
-								filter: "invert(100%)",
-								width: "100%",
-								height: "50px",
-								objectFit: "contain"
-							}}
-						/>
+							<img
+								src="/logo.svg"
+								style={{
+									filter: darkMode ? "invert(100%)" : "",
+									width: "100%",
+									height: "50px",
+									objectFit: "contain"
+								}}
+							/>
 						</Glitch>
 					</NavLink>
-				</motion.div>
 				<div style={{
 					flex: 1,
 					display: "flex",
@@ -131,11 +80,15 @@ const NavBar: React.FC<NavBarProps> = ({ style }) => {
 					const name = link.charAt(0).toUpperCase() + link.slice(1)
 					const className = delayedLocation.pathname.split('/')[1] === link ? 'delayed-active' : ''
 					return (
-						<motion.div 
-						key={link}
-						whileHover={{ opacity: .5 }} style={{ overflow: 'auto' }}>
-							<NavLink key={link} to={path} className={className}>{name === 'About' ? "Get In Touch" : name}</NavLink>
-						</motion.div>
+						<Glitch
+							scale={className == "" ? 0 : 7}
+						>
+							<motion.div 
+							key={link}
+							whileHover={{ opacity: .5 }} style={{ overflow: 'auto' }}>
+								<NavLink key={link} to={path} className={className}>{name === 'About' ? "Get In Touch" : name}</NavLink>
+							</motion.div>
+						</Glitch>
 					)
 				})}
 			</div>
