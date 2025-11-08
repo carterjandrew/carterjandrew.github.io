@@ -63,7 +63,12 @@ const FullLogo: FC<HTMLCanvasElement> = (props) => {
 								texture="/gradient.png"
 							/>
 						</Logo>
-						<EffectComposer>
+						<EffectComposer
+							multisampling={0}
+							resolutionScale={0.75}
+							frameBufferType={THREE.HalfFloatType}
+							renderPriority={1}
+						>
 							<LensDistortion
 								amount={0.005}
 							/>
