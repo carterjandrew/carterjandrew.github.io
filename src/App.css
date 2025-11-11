@@ -142,6 +142,22 @@ div {
 	backdrop-filter: blur(calc(var(--default-padding) / 2));
 }
 
+#mobile-nav-wrapper {
+	width: 100%;
+	flex-direction: column;
+}
+
+#mobile-navbar {
+	width: 100%;
+	padding: var(--default-padding);
+	gap: calc(var(--default-padding) * 5);
+	border-radius: 10px;
+	align-items: center;
+	justify-content: center;
+	background: var(--background-color);
+	backdrop-filter: blur(calc(var(--default-padding) / 2));
+}
+
 #inner-navbar a {
 	margin: 0;
 	display: flex;
