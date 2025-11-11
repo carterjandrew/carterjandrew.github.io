@@ -1,4 +1,4 @@
-import{j as n}from"./index-Bozkr-By.js";function r(e){const t={br:"br",h1:"h1",p:"p",strong:"strong",...e.components};return n.jsxs(n.Fragment,{children:[n.jsx(t.h1,{id:"onx-maps-internship",children:"OnX Maps Internship"}),`
+import{j as n}from"./index-H5DR2MI3.js";function r(e){const t={br:"br",h1:"h1",p:"p",strong:"strong",...e.components};return n.jsxs(n.Fragment,{children:[n.jsx(t.h1,{id:"onx-maps-internship",children:"OnX Maps Internship"}),`
 `,n.jsxs(t.p,{children:[n.jsx(t.strong,{children:"Project"}),n.jsx(t.br,{}),`
 `,"A feature to notify users when they deviate from a trail they are following"]}),`
 `,n.jsxs(t.p,{children:[n.jsx(t.strong,{children:"For"}),`
