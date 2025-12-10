@@ -10,8 +10,7 @@ import FourOhFour from './404';
 
 const projectPreviewElements: MdxMappingItem[] = Object.entries(import.meta.glob('../project-previews/**.mdx')).map(([key, mdxFunction]) => ({
 	path: key.replace('../project-previews/', '')
-		.replace('.mdx', '')
-		.replaceAll('-', ' '),
+		.replace('.mdx', ''),
 	element: <LazyMdx importHook={mdxFunction as LazyMdxProps['importHook']} />,
 }));
 
@@ -70,7 +69,7 @@ export default function ProjectsIndex() {
 						onMouseLeave={() => setTargetSlug(undefined)}
 						variants={buttonVariants}
 						animate={targetSlug ? path === targetSlug ? 'hover': 'nonHover' : 'normal'}
-					>{path}</motion.button>
+					>{path.replaceAll("-", " ")}</motion.button>
 				))}
 			</div>
 		</div >
