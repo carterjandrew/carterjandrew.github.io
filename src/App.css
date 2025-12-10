@@ -227,10 +227,6 @@ div {
 	padding: 0 0 1em 0;
 }
 
-#blog-md-wrapper code {
-	overflow: scroll;
-}
-
 #blog-md-wrapper blockquote {
 	border: solid;
 	border-color: var(--highlight-color);
