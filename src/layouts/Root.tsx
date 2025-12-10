@@ -24,7 +24,10 @@ export default function Root() {
 					flexGrow: 1,
 					alignItems: 'center',
 					maxHeight: '100%',
-					minHeight: 0
+					minHeight: 0,
+					maxWidth: "100vw",
+					width: "100vw",
+					overflowX: "clip",
 				}}
 			>
 				<Outlet />
