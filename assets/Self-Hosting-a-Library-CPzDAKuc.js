@@ -1,4 +1,4 @@
-import{j as s}from"./index-BavBL4xS.js";function a(e){const n={a:"a",blockquote:"blockquote",br:"br",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",img:"img",li:"li",ol:"ol",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...e.components};return s.jsxs(s.Fragment,{children:[s.jsx(n.h1,{id:"motivation-for-self-hosting",children:"Motivation for self hosting"}),`
+import{j as s}from"./index-BJ6iaevn.js";function a(e){const n={a:"a",blockquote:"blockquote",br:"br",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",img:"img",li:"li",ol:"ol",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...e.components};return s.jsxs(s.Fragment,{children:[s.jsx(n.h1,{id:"motivation-for-self-hosting",children:"Motivation for self hosting"}),`
 `,s.jsxs(n.p,{children:["The kindle application is ",s.jsx(n.strong,{children:"amazing"})," it lets you upload books, see them on all your devices, and take great notes in them (something I use a lot)."]}),`
 `,s.jsxs(n.p,{children:["However it has a glaring issue that really bugs me:",s.jsx(n.br,{}),`
 `,s.jsx(n.strong,{children:"No desktop support"})]}),`
