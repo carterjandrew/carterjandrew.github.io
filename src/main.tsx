@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { MDXProvider } from '@mdx-js/react'
 import { init } from '@emailjs/browser'
 
@@ -16,10 +16,10 @@ init({
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
-		<BrowserRouter>
+		<HashRouter>
 			<MDXProvider>
 				<App />
 			</MDXProvider>
-		</BrowserRouter>
+		</HashRouter>
 	</React.StrictMode>,
 )
