@@ -1,4 +1,4 @@
-import{j as n}from"./index-BJ6iaevn.js";function e(r){const s={br:"br",h1:"h1",img:"img",p:"p",strong:"strong",...r.components};return n.jsxs(n.Fragment,{children:[n.jsx(s.h1,{id:"dynamic-iam-roles",children:"Dynamic IAM Roles"}),`
+import{j as n}from"./index-C3L1ykVA.js";function e(r){const s={br:"br",h1:"h1",img:"img",p:"p",strong:"strong",...r.components};return n.jsxs(n.Fragment,{children:[n.jsx(s.h1,{id:"dynamic-iam-roles",children:"Dynamic IAM Roles"}),`
 `,n.jsx(s.p,{children:n.jsx(s.img,{src:"/iam-logo.png",alt:"Iam Logo"})}),`
 `,n.jsxs(s.p,{children:[n.jsx(s.strong,{children:"Summary"}),n.jsx(s.br,{}),`
 `,"A short article about how to use AWS to assign dynamic IAM roles to users. This enables granular access to reources without needing an api."]}),`

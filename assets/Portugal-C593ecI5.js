@@ -1,4 +1,4 @@
-import{j as e}from"./index-BJ6iaevn.js";function a(t){const n={a:"a",h1:"h1",h2:"h2",h3:"h3",p:"p",...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{id:"porto",children:"Porto"}),`
+import{j as e}from"./index-C3L1ykVA.js";function a(t){const n={a:"a",h1:"h1",h2:"h2",h3:"h3",p:"p",...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{id:"porto",children:"Porto"}),`
 `,e.jsx(n.p,{children:"Porto took my solo traveling virginity. As such it was both a big, rather entertaining, learning expirience and absolute delight."}),`
 `,e.jsx(n.p,{children:"![Image overview of the city]"}),`
 `,e.jsx(n.h2,{id:"homelessness",children:"Homelessness"}),`

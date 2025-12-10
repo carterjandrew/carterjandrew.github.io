@@ -1,4 +1,4 @@
-import{j as e}from"./index-BJ6iaevn.js";function i(n){const t={em:"em",h1:"h1",h2:"h2",p:"p",strong:"strong",...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(t.h1,{id:"offroute-tracking",children:"Offroute Tracking"}),`
+import{j as e}from"./index-C3L1ykVA.js";function i(n){const t={em:"em",h1:"h1",h2:"h2",p:"p",strong:"strong",...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(t.h1,{id:"offroute-tracking",children:"Offroute Tracking"}),`
 `,e.jsxs(t.p,{children:["During my internship I was excited to participate in OnX Map's monthly ",e.jsx(t.em,{children:"Day of Innovation"})," hackathon. Where workers get to spend some time on the clock working on features they want to see in the application. I was excited to add ",e.jsx(t.em,{children:e.jsx(t.strong,{children:"a feature I was very suprised wasn't in the application allready"})})]}),`
 `,e.jsx(t.p,{children:"TODO: Insert video from Zach"}),`
 `,e.jsx(t.h1,{id:"feature-definition",children:"Feature Definition"}),`
