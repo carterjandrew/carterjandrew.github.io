@@ -1,4 +1,4 @@
-import{j as s}from"./index-Dno8zT30.js";function a(e){const n={a:"a",blockquote:"blockquote",br:"br",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",img:"img",li:"li",ol:"ol",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...e.components};return s.jsxs(s.Fragment,{children:[s.jsx(n.h1,{id:"motivation-for-self-hosting",children:"Motivation for self hosting"}),`
+import{j as s}from"./index-BavBL4xS.js";function a(e){const n={a:"a",blockquote:"blockquote",br:"br",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",img:"img",li:"li",ol:"ol",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...e.components};return s.jsxs(s.Fragment,{children:[s.jsx(n.h1,{id:"motivation-for-self-hosting",children:"Motivation for self hosting"}),`
 `,s.jsxs(n.p,{children:["The kindle application is ",s.jsx(n.strong,{children:"amazing"})," it lets you upload books, see them on all your devices, and take great notes in them (something I use a lot)."]}),`
 `,s.jsxs(n.p,{children:["However it has a glaring issue that really bugs me:",s.jsx(n.br,{}),`
 `,s.jsx(n.strong,{children:"No desktop support"})]}),`
@@ -237,7 +237,7 @@ If you followed the tailscale setup your mobile device will need the tailscale a
 `,s.jsx(n.h2,{id:"setting-up-the-remote-library",children:"Setting up the remote library"}),`
 `,s.jsx(n.p,{children:"Here is how to link the remote library to Pocketbook:"}),`
 `,s.jsx(n.h3,{id:"open-the-books-page",children:"Open the books page."}),`
-`,s.jsx(n.p,{children:s.jsx(n.img,{src:"/booklore/home.jpg",alt:"Globe icon"})}),`
+`,s.jsx(n.p,{children:s.jsx(n.img,{src:"/booklore/home.png",alt:"Globe icon"})}),`
 `,s.jsx(n.h3,{id:"click-on-the-globe-icon",children:"Click on the globe icon"}),`
 `,s.jsxs(n.p,{children:[s.jsx(n.img,{src:"/booklore/globe-icon.jpg",alt:"Globe icon"}),`
 This is the category for remote libraries`]}),`
@@ -261,13 +261,13 @@ On android only the `,s.jsx(n.code,{children:"url"})," and ",s.jsx(n.code,{child
 `,s.jsx(n.p,{children:"To do this simply go into settings in pocketbook, click to add a Pocketbook Cloud account. As long as you choose to not upload recently read books this will only sync the notes, not the books themselves."}),`
 `,s.jsx(n.h1,{id:"setting-up-a-reader-on-a-deskop",children:"Setting up a reader on a deskop"}),`
 `,s.jsx(n.p,{children:"Pocketbook does not have a native desktop application, but it is simple enough to run in an android emulator. For me, I use Arch Linux for my operating system and with KDE6 as my desktop enviment it's ideal to use Waydroid for my machine."}),`
-`,s.jsx(n.p,{children:s.jsx(n.a,{href:"https://wiki.archlinux.org/title/Waydroid#Installation",children:"Guide for installing waydroind on arch"})}),`
+`,s.jsx(n.p,{children:s.jsx(n.a,{href:"https://wiki.archlinux.org/title/Waydroid#Installation",children:"Guide for installing waydroid on arch"})}),`
 `,s.jsx(n.h3,{id:"installing-f-droid",children:"Installing F-Droid"}),`
 `,s.jsxs(n.blockquote,{children:[`
 `,s.jsx(n.p,{children:"F-Droid is an installable catalogue of FOSS (Free and Open Source Software) applications for the Android platform. The client makes it easy to browse, install, and keep track of updates on your device."}),`
 `]}),`
 `,s.jsxs(n.p,{children:["We can first ",s.jsx(n.a,{href:"https://f-droid.org/",children:"download it from here"})," and then run"]}),`
-`,s.jsx(n.pre,{className:"language-bash",children:s.jsx(n.code,{className:"language-bash code-highlight",children:s.jsxs(n.span,{className:"code-line",children:["$ waydroid app ",s.jsx(n.span,{className:"token function",children:"install"})," ",s.jsx(n.span,{className:"token variable",children:"$path_to_apk"}),`
+`,s.jsx(n.pre,{className:"language-bash",children:s.jsx(n.code,{className:"language-bash code-highlight",children:s.jsxs(n.span,{className:"code-line",children:["waydroid app ",s.jsx(n.span,{className:"token function",children:"install"})," ",s.jsx(n.span,{className:"token variable",children:"$path_to_apk"}),`
 `]})})}),`
 `,s.jsx(n.p,{children:"to install the f-droid apk."}),`
 `,s.jsx(n.h3,{id:"installing-auroura-store",children:"Installing Auroura Store"}),`

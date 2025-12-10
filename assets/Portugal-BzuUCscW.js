@@ -1,4 +1,4 @@
-import{j as n}from"./index-Dno8zT30.js";function o(r){const t={h1:"h1",p:"p",strong:"strong",...r.components};return n.jsxs(n.Fragment,{children:[n.jsx(t.h1,{id:"trip-to-portugal",children:"Trip to Portugal"}),`
+import{j as n}from"./index-BavBL4xS.js";function o(r){const t={h1:"h1",p:"p",strong:"strong",...r.components};return n.jsxs(n.Fragment,{children:[n.jsx(t.h1,{id:"trip-to-portugal",children:"Trip to Portugal"}),`
 `,n.jsx(t.p,{children:"![Photo of something]"}),`
 `,n.jsxs(t.p,{children:[n.jsx(t.strong,{children:"Time"}),`
 May 2025`]}),`
