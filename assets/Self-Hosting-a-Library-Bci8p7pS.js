@@ -1,4 +1,4 @@
-import{j as n}from"./index-D2TXVjhw.js";function s(e){const o={h1:"h1",img:"img",p:"p",strong:"strong",...e.components};return n.jsxs(n.Fragment,{children:[n.jsx(o.h1,{id:"self-hosting-a-library",children:"Self hosting a library"}),`
+import{j as n}from"./index-ByR0HOzQ.js";function s(e){const o={h1:"h1",img:"img",p:"p",strong:"strong",...e.components};return n.jsxs(n.Fragment,{children:[n.jsx(o.h1,{id:"self-hosting-a-library",children:"Self hosting a library"}),`
 `,n.jsx(o.p,{children:n.jsx(o.img,{src:"/booklore/booklore-home.png",alt:"booklore-website"})}),`
 `,n.jsxs(o.p,{children:[n.jsx(o.strong,{children:"Date Written"}),`
 12/10/25`]}),`

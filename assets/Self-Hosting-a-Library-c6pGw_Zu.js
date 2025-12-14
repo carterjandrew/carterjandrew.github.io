@@ -1,6 +1,6 @@
-import{j as s}from"./index-D2TXVjhw.js";function a(e){const n={a:"a",blockquote:"blockquote",br:"br",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",img:"img",li:"li",ol:"ol",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...e.components};return s.jsxs(s.Fragment,{children:[s.jsx(n.h1,{id:"motivation-for-self-hosting",children:"Motivation for self hosting"}),`
+import{j as s}from"./index-ByR0HOzQ.js";function a(e){const n={a:"a",blockquote:"blockquote",br:"br",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",img:"img",li:"li",ol:"ol",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...e.components};return s.jsxs(s.Fragment,{children:[s.jsx(n.h1,{id:"motivation-for-self-hosting",children:"Motivation for self hosting"}),`
 `,s.jsx(n.p,{children:s.jsx(n.img,{src:"/booklore/demo.gif",alt:"Booklore Link"})}),`
-`,s.jsxs(n.p,{children:["The kindle application is ",s.jsx(n.strong,{children:"amazing"})," it lets you upload books, see them on all your devices, and take great notes in them (something I use a lot)."]}),`
+`,s.jsxs(n.p,{children:["The kindle application is ",s.jsx(n.strong,{children:"amazing"})," it lets you upload books, see them on all your devices, and take notes in them (something I use a lot)."]}),`
 `,s.jsxs(n.p,{children:["However it has a glaring issue that really bugs me:",s.jsx(n.br,{}),`
 `,s.jsx(n.strong,{children:"No desktop support"})]}),`
 `,s.jsxs(n.p,{children:["Yes, there is a webapp but that ",s.jsx(n.em,{children:"only lets you view books you've bought through amazon"})," ",s.jsx(n.strong,{children:"for some reason"})]}),`

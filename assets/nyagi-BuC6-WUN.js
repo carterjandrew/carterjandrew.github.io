@@ -1,4 +1,4 @@
-import{j as n}from"./index-D2TXVjhw.js";function i(t){const e={a:"a",h1:"h1",p:"p",...t.components};return n.jsxs(n.Fragment,{children:[n.jsx(e.h1,{id:"my-work-with-nyagi",children:"My work with NYAGI"}),`
+import{j as n}from"./index-ByR0HOzQ.js";function i(t){const e={a:"a",h1:"h1",p:"p",...t.components};return n.jsxs(n.Fragment,{children:[n.jsx(e.h1,{id:"my-work-with-nyagi",children:"My work with NYAGI"}),`
 `,n.jsxs(e.p,{children:[n.jsx(e.a,{href:"https://nyagi.org",children:"NYAGI"})," is a non-profit dedicated to helping save mothers lives through ultrasound in medically underserved areas. During my time I've worked in the Republic of Somaliland, on a ultrasound computer vision app, and built a software for constructing lecture content for trainers. All my contributions are detailed below."]}),`
 `,n.jsx(e.h1,{id:"somaliland",children:"Somaliland"}),`
 `,n.jsx(e.h1,{id:"cadus",children:"CADUS"}),`

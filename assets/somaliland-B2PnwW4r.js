@@ -1,4 +1,4 @@
-import{j as e}from"./index-D2TXVjhw.js";function i(t){const n={a:"a",em:"em",h1:"h1",h2:"h2",img:"img",p:"p",...t.components};return e.jsxs(e.Fragment,{children:[e.jsxs(n.p,{children:[`During the fall of 2024 I joined an expidition to Somaliland with the NYAGI project non-profit. Our goal was to teach 5 members of the Edna Adan Hostpital how to use butterfly probe for prenadal care.
+import{j as e}from"./index-ByR0HOzQ.js";function i(t){const n={a:"a",em:"em",h1:"h1",h2:"h2",img:"img",p:"p",...t.components};return e.jsxs(e.Fragment,{children:[e.jsxs(n.p,{children:[`During the fall of 2024 I joined an expidition to Somaliland with the NYAGI project non-profit. Our goal was to teach 5 members of the Edna Adan Hostpital how to use butterfly probe for prenadal care.
 `,e.jsx(n.img,{src:"/mid-scan.png",alt:"Mid Scan Photo"})]}),`
 `,e.jsx(n.h1,{id:"background-on-nyagi",children:"Background on NYAGI"}),`
 `,e.jsxs(n.p,{children:["NYAGI is a foundation dedicated to saving mothers lives. To learn more about my other work with them, look ",e.jsx(n.a,{href:"/projects/nyagi",children:"here"}),"."]}),`
