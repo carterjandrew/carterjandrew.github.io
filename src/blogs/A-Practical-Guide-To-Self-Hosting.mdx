@@ -1,0 +1,155 @@
+# Motivaiton
+## ***Self hosting is suprisingly useful***
+For example, I use it for:
+
+### 1. A free password manager synced to all my devices
+
+This is done using [Vaultwarden](https://github.com/dani-garcia/vaultwarden) as a backend  
+And [Bitwarden](https://bitwarden.com/) as a frontend
+
+### 2. A database for syncing my notes and music across my devices
+
+Done using [Syncthing](https://syncthing.net/)
+
+### 3. A libaray of books with the progress, notes, bookmarks, highlights, and titles synced
+
+Done using:
+
+- [Booklore](https://github.com/booklore-app/BookLore)
+- [Koreader Sync](https://github.com/koreader/koreader-sync-server)
+- [Koreader](https://koreader.rocks/)
+
+### 4. A database for hosting content for my website
+
+Done using [Pocketbase](https://pocketbase.io/)
+
+# How I do all of this for free on a old laptop
+
+Theres one tool that makes this magic come to life:  
+
+### ***Tailscale***
+
+[Tailscale](https://tailscale.com/) is magical. It gives you:
+
+> Fast, seamless device connectivity — no hardware, no firewall rules, no wasted time.
+
+Basically, it's a free vpn with some **incredibly** useful extras.  
+It lets you:
+
+1. Connect all your devices like their on your local network
+2. Serve content privately over the vpn network
+3. Server content publicly on the web to anyone
+
+*So if you take anything from this article it should be **a shameless plug for Tailscale*** and the incredible services it offers. **To get started visit [here](https://tailscale.com/kb/1017/install)**.
+
+I'll break down how this works here:
+
+### How it works
+#### Connecting all your devices like their on your local network
+
+This is just what tailscale does out of the box. If you run
+
+```shell
+tailscale status
+```
+
+on a device with it installed you will see something like:
+
+```
+100.90.94.104    carters-laptop    carterinmotion@  linux    -
+100.84.115.59    desktop           carterinmotion@  linux    offline, last seen 141d ago
+100.113.140.51   hisense-hitv205n  carterinmotion@  android  offline, last seen 1h ago
+100.78.52.52     iphone-12-pro-1   carterinmotion@  iOS      -
+100.79.79.113    iphone-12-pro     carterinmotion@  iOS      offline, last seen 47d ago
+100.76.81.33     onyx-noteair      carterinmotion@  android  offline, last seen 143d ago
+100.109.210.115  surface-server    carterinmotion@  linux    active; direct 192.168.0.18:41641, tx 111608 rx 158676
+```
+
+All of these devices, from anywhere in the world, can be accessed using the *ip addresses* or the *name* listed in the second column.  
+So for example I could do:
+
+```shell
+ssh surface-server
+```
+
+to connect to my default account over ssh.
+
+Not impressed yet? Check this out:
+
+If I run instead:
+```shell
+ssh -L 6060:localhost:6060 surface-server
+```
+
+Now if we were serving a website on port 6060 on the server, we would be able to see that at `localhost:6060` on our machine connecting.
+
+Now, obviously we don't want to need to ssh into the server anytime we want to connect to it, so lets take this a step further:
+
+#### Serve content privately over the vpn network
+
+Using a service called `tailscale serve` we can make a url *any device on our tailscale network* can use to see content. So if we logged onto our server and called:
+
+```bash
+tailscale serve --https=6060 http://localhost:6060
+```
+
+we should see:
+```
+Available within your tailnet:
+
+https://surface-server.tail6e709.ts.net:6060/
+|-- proxy http://localhost:6060
+
+Press Ctrl+C to exit.
+```
+
+Now if we went to that url on our device, we would be able to see the website being served there!
+
+Now we can make this a **persistant background service** by calling:
+
+```bash
+tailscale serve --https=6060 --bg http://localhost:6060
+```
+
+now if we were to call: `tailscale status` we would see:
+
+```
+https://surface-server.tail6e709.ts.net:6060 (tailnet only)
+|-- / proxy http://localhost:6060
+```
+
+so we could do this for a whole bunch of services, and access them all using our other devices from these urls.
+
+***Still not impressed? Keep reading***
+
+#### Server content publicly on the web to anyone
+
+[Tailscale funnel](https://tailscale.com/kb/1223/funnel) is a service that works like `serve`, except it is publicly availible.  
+So in my case I use pocketbase to serve some content on my website. You could use:
+
+```bash
+tailscale funnel --https=443 --set-path=/pocketbase/ --bg 8090
+```
+
+to run a funnel for my database service over port 8090. And running `tailscale status` again shows us:
+
+```
+# Funnel on:
+#     - https://surface-server.tail6e709.ts.net
+
+https://surface-server.tail6e709.ts.net (Funnel on)
+|-- /pocketbase/ proxy http://127.0.0.1:8090
+```
+
+Now anyone, even you could visit [this link](https://surface-server.tail9e320.ts.net/pocketbase/_/) and see my pocketbase server running live
+
+# The second part to this magic:
+
+## ***NixOS***
+
+Now, to be honest, if you are not tech savy **I absolutley would not reccomend NixOS to you**. In practise it is implemented in a way that gives utterly *terrible* errors, and is a lot to learn. But it comes with some major upsides:
+
+It does not require you to keep everything up to date when you add new packages
+It makes experimenting incredibly easy
+It makes recovering incredibly easy
+It makes configuration of anything easy to do remotely from anywhere
