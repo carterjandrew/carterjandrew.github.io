@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: 'https://carterjandrew.github.io/',
+	base: '/',
 	plugins: [
 		mdx({
 			rehypePlugins: [
