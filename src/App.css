@@ -274,6 +274,7 @@ div {
 
 #blog-preview-wrapper p> img{
     max-height: 100%;
+		max-width: 100%;
 }
 
 #abouttable {

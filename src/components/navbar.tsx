@@ -93,6 +93,7 @@ const NavBar: React.FC<NavBarProps> = ({ style }) => {
 			<>
 				{links.map((link) => (
 					<NavBarLink 
+						key={link}
 						link={link} 
 						delayedLocation={delayedLocation}
 					/>

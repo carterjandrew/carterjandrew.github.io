@@ -1,6 +1,5 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion';
-import { useProjects } from '../hooks/contextHooks'
 import { useEffect, useMemo, useState } from 'react'
 import LazyMdx, { LazyMdxProps, MdxMappingItem } from '../components/lazyMdx';
 import { AnimatePresence, Variants } from 'framer-motion';
@@ -11,13 +10,15 @@ import FourOhFour from './404';
 const projectPreviewElements: MdxMappingItem[] = Object.entries(import.meta.glob('../project-previews/**.mdx')).map(([key, mdxFunction]) => ({
 	path: key.replace('../project-previews/', '')
 		.replace('.mdx', ''),
-	element: <LazyMdx importHook={mdxFunction as LazyMdxProps['importHook']} />,
+	element: <LazyMdx
+		key={key}
+		importHook={mdxFunction as LazyMdxProps['importHook']}
+	/>,
 }));
 
 export default function ProjectsIndex() {
 	const navigate = useNavigate()
 	const locaiton = useLocation()
-	const projects = useProjects()
 	const [delayedLocation, setDelayedLocation] = useState(locaiton)
 	const [currentSlug, setCurrentSlug] = useState<string>()
 	const [targetSlug, setTargetSlug] = useState<string>()
@@ -39,6 +40,7 @@ export default function ProjectsIndex() {
 	}, [])
 
 	useEffect(() => {
+		console.log("Target slug update to:", targetSlug)
 		if(!currentSlug) setCurrentSlug(targetSlug)
 	}, [targetSlug])
 
@@ -61,16 +63,21 @@ export default function ProjectsIndex() {
 				</AnimatePresence>
 			</div>
 			<div id='blog-index'>
-				{projectPreviewElements.map(({ path }) => (
+				{projectPreviewElements.map(({ path }) => {
+					return (
 					<motion.button
 						key={path}
 						onClick={() => navigate(path)}
 						onMouseEnter={() => setTargetSlug(path)}
-						onMouseLeave={() => setTargetSlug(undefined)}
+						onMouseLeave={() => {
+							console.log("Mouse leave detected")
+							setTargetSlug(undefined)
+						}}
 						variants={buttonVariants}
 						animate={targetSlug ? path === targetSlug ? 'hover': 'nonHover' : 'normal'}
 					>{path.replaceAll("-", " ")}</motion.button>
-				))}
+				)
+				})}
 			</div>
 		</div >
 	)
