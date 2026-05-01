@@ -11,18 +11,19 @@ import { BlogContext, ProjectContext } from './contexts/contexts';
 import BlogIndex from './pages/blogIndex';
 import About from './pages/about';
 import ProjectsIndex from './pages/projectIndex';
-import LazyMdx, { LazyMdxProps, MdxMappingItem } from './components/lazyMdx';
+import LazyMdx, { LazyMdxProps } from './components/lazyMdx';
 import FourOhFour from './pages/404';
 import Pom from './pages/pom';
 import Resume from './pages/resume';
+import { NodeMappingItem } from './components/categoryIndex';
 
 
-const blogMdxElements: MdxMappingItem[] = Object.entries(import.meta.glob('./blogs/**.mdx')).map(([key, mdxFunction]) => ({
+const blogMdxElements: NodeMappingItem[] = Object.entries(import.meta.glob('./blogs/**.mdx')).map(([key, mdxFunction]) => ({
 	path: key.replace('./blogs/', '').replace('.mdx', ''),
 	element: <LazyMdx importHook={mdxFunction as LazyMdxProps['importHook']} />,
 }));
 
-const projectMdxElements: MdxMappingItem[] = Object.entries(import.meta.glob('./projects/**.mdx')).map(([key, mdxFunction]) => ({
+const projectMdxElements: NodeMappingItem[] = Object.entries(import.meta.glob('./projects/**.mdx')).map(([key, mdxFunction]) => ({
 	path: key.replace('./projects/', '').replace('.mdx', ''),
 	element: <LazyMdx importHook={mdxFunction as LazyMdxProps['importHook']} />,
 }));
